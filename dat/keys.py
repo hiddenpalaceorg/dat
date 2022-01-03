@@ -6,8 +6,8 @@ from datetime import datetime
 from collections import namedtuple
 
 from nacl.signing import SigningKey
-from nacl.encoding import Base64Encoder
 import yaml
+from dat.base64_encoder import UnpaddedBase64Encoder
 from dat.exceptions import DatException
 
 from dat.version import version_string
@@ -28,8 +28,8 @@ def generate_keys(user_name):
     with open(path, "w") as yaml_file:
         key = SigningKey.generate()
 
-        secret = Base64Encoder.encode(bytes(key)).decode()
-        public = key.verify_key.encode(encoder=Base64Encoder).decode()
+        secret = UnpaddedBase64Encoder.encode(bytes(key)).decode()
+        public = key.verify_key.encode(encoder=UnpaddedBase64Encoder).decode()
         contents = {
             "user_name": user_name,
             "created": datetime.now().isoformat(),
@@ -49,8 +49,7 @@ KeyInfo = namedtuple("KeyInfo", ["key", "user_name"])
 def load_secret_key():
     contents = load_yaml()
 
-    seed = Base64Encoder.decode(contents["secret"].encode())
-    key = SigningKey(seed=seed)
+    key = SigningKey(seed=contents["secret"].encode(), encoder=UnpaddedBase64Encoder)
 
     return KeyInfo(key=key, user_name=contents["user_name"])
 

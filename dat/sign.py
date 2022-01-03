@@ -1,17 +1,16 @@
 from xml.etree.ElementTree import XML
-from nacl.signing import SigningKey
-from nacl.encoding import Base64Encoder
+from dat.base64_encoder import UnpaddedBase64Encoder
 from dat.keys import load_secret_key
 from dat.version import version_string
 
 WIKI_SIGNATURE_FORMAT = """<!-- BEGIN SIGNED MESSAGE -->
 {message}
 <!-- BEGIN SIGNATURE -->
-{{{{datsignature|
-Signed by: {signed_by}
-Signer key: {signer_key}
-Signature: {signature}
-Version: {version}
+{{{{DatSignature
+| Signed by: {signed_by}
+| Signer key: {signer_key}
+| Signature: {signature}
+| Version: {version}
 }}}}
 <!-- END SIGNATURE -->"""
 
@@ -39,8 +38,9 @@ def sign_message(message, format):
 
 
 def sign_message_using_key(message, format, key, user_name):
-    signed = key.sign(message.encode(), encoder=Base64Encoder)
-    signer_key = key.verify_key.encode(encoder=Base64Encoder).decode()
+    signed = key.sign(message.encode(), encoder=UnpaddedBase64Encoder)
+    signer_key = key.verify_key.encode(encoder=UnpaddedBase64Encoder).decode()
+
     signature = signed.signature.decode()
 
     return signature_format(format).format(

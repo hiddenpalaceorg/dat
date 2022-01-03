@@ -18,6 +18,9 @@ def main():
     subparser.add_argument("file", nargs="+", help="files to process")
     subparser.add_argument("--format", "-f", choices=["wiki", "xml"], default="wiki")
 
+    subparser = subparsers.add_parser("verify", help="Verify a message")
+    subparser.add_argument("file", help="file to verify")
+
     subparser = subparsers.add_parser(
         "generate-keys", help="Generate a key pair for signing dats"
     )
@@ -32,6 +35,11 @@ def main():
             from dat.create import create_dat
 
             create_dat(args.file, args.format)
+
+        elif args.command == "verify":
+            from dat.verify import verify_file
+
+            verify_file(args.file)
 
         elif args.command == "generate-keys":
             from dat.keys import generate_keys
