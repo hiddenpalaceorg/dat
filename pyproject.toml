@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "dat"
+version = "0.1.0"
+description = ""
+authors = ["Hidden Palace <hp@hiddenpalace.org>"]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+python-magic = "^0.4.24"
+PyNaCl = "^1.4.0"
+PyYAML = "^6.0"
+
+[tool.poetry.dev-dependencies]
+pytest = "^5.2"
+
+[tool.poetry.scripts]
+dat = 'dat.main:main'
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
