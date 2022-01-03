@@ -1,5 +1,6 @@
 from genericpath import exists
 import os
+import logging
 from pathlib import Path
 from datetime import datetime
 from collections import namedtuple
@@ -10,6 +11,8 @@ import yaml
 from dat.exceptions import DatException
 
 from dat.version import version_string
+
+logger = logging.getLogger(__name__)
 
 
 def generate_keys(user_name):
@@ -37,7 +40,7 @@ def generate_keys(user_name):
 
         yaml_file.write(yaml.dump(contents))
 
-        print(f"Successfully generated {path}")
+        logger.info(f"Successfully generated {path}")
 
 
 KeyInfo = namedtuple("KeyInfo", ["key", "user_name"])

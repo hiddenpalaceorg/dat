@@ -35,7 +35,7 @@ def signature_format(format):
 def sign_message(message, format):
     key_info = load_secret_key()
 
-    print(sign_message_using_key(message, format, key_info.key, key_info.user_name))
+    return sign_message_using_key(message, format, key_info.key, key_info.user_name)
 
 
 def sign_message_using_key(message, format, key, user_name):

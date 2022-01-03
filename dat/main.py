@@ -1,9 +1,14 @@
 import argparse
+import logging
 
 from dat.exceptions import DatException
 
+logger = logging.getLogger(__name__)
+
 
 def main():
+    logging.basicConfig(format="%(message)s", level=logging.INFO)
+
     parser = argparse.ArgumentParser(description="")
     subparsers = parser.add_subparsers(
         title="subcommands", dest="command", metavar="COMMAND"
@@ -37,4 +42,4 @@ def main():
             parser.print_help()
 
     except DatException as e:
-        print(f"\nError:\n{e}")
+        logger.error(f"\nError:\n{e}")

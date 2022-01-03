@@ -27,4 +27,5 @@ def create_dat(path_names, format):
     elif format == "xml":
         message = format_xml(info, name)
 
-    sign_message(message, format)
+    signed = sign_message(message, format)
+    print(signed)

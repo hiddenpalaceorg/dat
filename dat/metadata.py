@@ -2,6 +2,7 @@ import hashlib
 import zlib
 import os
 import platform
+import logging
 import magic
 from datetime import datetime
 from pathlib import Path
@@ -9,6 +10,8 @@ from dat.exceptions import DatException
 from dat.version import PACKAGE_VERSION, PROTOCOL_VERSION, git_hash
 
 BUFFER_SIZE = 1024 * 1024
+
+logger = logging.getLogger(__name__)
 
 
 def file_metadata(path_names):
@@ -23,7 +26,6 @@ def file_metadata(path_names):
 
             for (dir, _, files) in os.walk(path):
                 for file_name in files:
-                    print(file_name)
                     paths.append(os.path.join(dir, file_name))
 
         elif path.is_file():
@@ -35,7 +37,7 @@ def file_metadata(path_names):
         for path_name in sorted(paths):
             relative_path = os.path.normpath(os.path.relpath(path_name, root))
 
-            print(f"Processing {relative_path}...")
+            logger.info(f"Processing {relative_path}...")
             info = {
                 "file": relative_path,
                 "size": os.path.getsize(path_name),
