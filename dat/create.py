@@ -1,8 +1,8 @@
 import os
-from dat.format.wiki import format_wiki
+# from dat.format.wiki import format_wiki
 from dat.format.dat import format_dat
 from dat.metadata import file_metadata
-from dat.sign import sign_message
+# from dat.sign import sign_message
 
 BUFFER_SIZE = 1024 * 1024
 
