@@ -1,13 +1,13 @@
 import os
 from dat.format.wiki import format_wiki
-from dat.format.xml import format_xml
+from dat.format.dat import format_dat
 from dat.metadata import file_metadata
 from dat.sign import sign_message
 
 BUFFER_SIZE = 1024 * 1024
 
 
-def create_dat(path_names, format):
+def create_dat(path_names):
     info = file_metadata(path_names)
 
     if len(path_names) == 1:
@@ -22,10 +22,14 @@ def create_dat(path_names, format):
     else:
         name = ""
 
-    if format == "wiki":
-        message = format_wiki(info, name)
-    elif format == "xml":
-        message = format_xml(info, name)
+    # if format == "wiki":
+    #     message = format_wiki(info, name)
+    # elif format == "dat":
+    message = format_dat(info, name)
+    
+    print(message)
 
-    signed = sign_message(message, format)
-    print(signed)
+    # signed = sign_message(message, format)
+
+    # print(info)
+    # print(signed)

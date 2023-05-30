@@ -27,7 +27,7 @@ Version: {version}
 def signature_format(format):
     if format == "wiki":
         return WIKI_SIGNATURE_FORMAT
-    elif format == "xml":
+    elif format == "dat":
         return XML_SIGNATURE_FORMAT
 
 

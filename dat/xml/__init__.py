@@ -1,8 +1,10 @@
 import xml.etree.ElementTree as ET
 
 
-def format_xml(metadata, name):
-    game = ET.Element("game", name=name)
+def create_dat(metadata, name):
+    datafile = ET.Element("datafile")
+    
+    game = ET.SubElement(datafile, "game", name=name)
 
     for file in metadata:
         props = {
@@ -15,5 +17,6 @@ def format_xml(metadata, name):
         }
         ET.SubElement(game, "rom", **props)
 
-    ET.indent(game, space="\t", level=0)
-    return ET.tostring(game, encoding="unicode")
+    ET.indent(datafile, level=0)
+    # print(ET.tostring(datafile, encoding="unicode"))
+    return ET.tostring(datafile, encoding="unicode")

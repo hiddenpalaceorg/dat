@@ -1,12 +1,12 @@
 import os
 from datetime import datetime
-from dat.format.xml import format_xml
+from dat.format.dat import format_dat
 from dat.version import version_string
 from dat.keys import user_name
 
 
 def format_wiki(info, name):
-    xml = format_xml(info, name)
+    xml = format_dat(info, name)
     created = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
     output = []

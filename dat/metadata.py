@@ -37,7 +37,7 @@ def file_metadata(path_names):
         for path_name in sorted(paths):
             relative_path = os.path.normpath(os.path.relpath(path_name, root))
 
-            logger.info(f"Processing {relative_path}...")
+            # logger.info(f"Processing {relative_path}...")
             info = {
                 "file": relative_path,
                 "size": os.path.getsize(path_name),

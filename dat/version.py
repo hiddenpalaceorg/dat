@@ -2,7 +2,8 @@ from importlib import metadata
 import subprocess
 
 
-PACKAGE_VERSION = metadata.version("dat")
+# PACKAGE_VERSION = metadata.version("dat")
+PACKAGE_VERSION = 1
 PROTOCOL_VERSION = 1
 
 
